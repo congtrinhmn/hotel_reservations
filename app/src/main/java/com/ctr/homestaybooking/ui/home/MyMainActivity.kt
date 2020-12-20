@@ -15,6 +15,7 @@ import com.ctr.homestaybooking.ui.home.account.AccountContainerFragment
 import com.ctr.homestaybooking.ui.home.favotite.FavoriteContainerFragment
 import com.ctr.homestaybooking.ui.home.host.calendar.HostBookingContainerFragment
 import com.ctr.homestaybooking.ui.home.host.place.HostPlaceContainerFragment
+import com.ctr.homestaybooking.ui.home.host.progress.ProgressFragment
 import com.ctr.homestaybooking.ui.home.mybooking.MyBookingContainerFragment
 import com.ctr.homestaybooking.ui.home.places.HomeContainerFragment
 import com.google.android.material.tabs.TabLayout
@@ -150,7 +151,7 @@ open class MyMainActivity : MainActivity() {
     private fun initTab() {
         val icons = mutableListOf(
             R.drawable.bg_icon_tab_home,
-            R.drawable.bg_icon_tab_save,
+            if (App.instance.localRepository.isUserSession()) R.drawable.bg_icon_tab_save else R.drawable.bg_icon_tab_progress,
             R.drawable.bg_icon_tab_my_booking,
             R.drawable.bg_icon_tab_inbox,
             R.drawable.bg_icon_tab_account
@@ -220,7 +221,7 @@ open class MyMainActivity : MainActivity() {
                     1
                 )
                 setTab(
-                    "Đặt phòng",
+                    "Đặt chỗ của tôi",
                     getDrawable(R.drawable.bg_icon_tab_my_booking),
                     MyBookingContainerFragment.getNewInstance(),
                     2
@@ -247,7 +248,7 @@ open class MyMainActivity : MainActivity() {
                 setTab(
                     "Thống kê",
                     getDrawable(R.drawable.bg_icon_tab_my_booking),
-                    FavoriteContainerFragment.getNewInstance(),
+                    ProgressFragment.getNewInstance(),
                     1
                 )
                 setTab(
